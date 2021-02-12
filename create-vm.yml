@@ -1,16 +1,13 @@
 ---
-  - hosts: localhost
+- hosts: localhost
 
   vars:
     datacenter: 'Datacenter'
-    esxi_host: 'esxi-1.labvmware.local'
+    #esxi_host: 'esxi-1.labvmware.local'
     notes: 'Created by Ansible'
-    vcenter_hostname: vcenter.labvmware.local
-    vcenter_user: administrator@vsphere.local
-    vcenter_pass: Espoir15!
     datastore: DatastoreCluster
     network: VM Network
-    memory: 10
+    memory: 512
     cpucount: 1
     osid: centos64Guest
 
@@ -33,8 +30,8 @@
         type: thin
         datastore: "{{datastore}}"
       hardware:
-        memory_mb: 512
-        num_cpus: 1
+        memory_mb: "{{memory}}"
+        num_cpus: "{{cpucount}}"
         scsi: paravirtual
 #      networks:
 #      - name: 'VM Network'
