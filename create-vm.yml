@@ -14,9 +14,9 @@
   tasks:
   - name: Create a VM from template
     vmware_guest:
-      hostname: "{{vcenter_hostname}}"
-      username: "{{vcenter_user}}"
-      password: "{{vcenter_pass}}"
+      #hostname: "{{vcenter_hostname}}"
+      #username: "{{vcenter_user}}"
+      #password: "{{vcenter_pass}}"
       cluster: clusterESGI
       validate_certs: no
       datacenter: "{{datacenter}}"
