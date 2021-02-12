@@ -12,7 +12,7 @@
     osid: centos64Guest
 
   tasks:
-  - name: Create a VM from template
+  - name: Create a VM
     vmware_guest:
       cluster: clusterESGI
       validate_certs: no
