@@ -1,0 +1,44 @@
+---
+  - hosts: localhost
+
+  vars:
+    datacenter: 'Datacenter'
+    esxi_host: 'esxi-1.labvmware.local'
+    notes: 'Created by Ansible'
+    vcenter_hostname: vcenter.labvmware.local
+    vcenter_user: administrator@vsphere.local
+    vcenter_pass: Espoir15!
+    datastore: DatastoreCluster
+    network: VM Network
+    memory: 10
+    cpucount: 1
+    osid: centos64Guest
+
+  tasks:
+  - name: Create a VM from template
+    vmware_guest:
+      hostname: "{{vcenter_hostname}}"
+      username: "{{vcenter_user}}"
+      password: "{{vcenter_pass}}"
+      cluster: clusterESGI
+      validate_certs: no
+      datacenter: "{{datacenter}}"
+      folder: /Datacenter/vm
+      name: testvmff111_3
+      state: present
+      guest_id: "{{osid}}"
+      #template: vm1
+      disk:
+      - size_gb: 1
+        type: thin
+        datastore: "{{datastore}}"
+      hardware:
+        memory_mb: 512
+        num_cpus: 1
+        scsi: paravirtual
+#      networks:
+#      - name: 'VM Network'
+#        mac: aa:bb:dd:aa:00:14
+      wait_for_ip_address: no #yes
+#    delegate_to: localhost
+    register: deploy    #_vm
