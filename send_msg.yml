@@ -1,0 +1,12 @@
+---
+- name: Warn logged in users of message
+  hosts: windows_server
+
+  vars_files:
+    - messagevar.yml
+
+  tasks:
+  - name: Message
+    win_msg:
+      display_seconds: 60
+      msg: "{{ Message }}"
