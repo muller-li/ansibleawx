@@ -1,0 +1,31 @@
+---
+- name: VMware playbook create VM from vCenter
+  hosts: localhost
+
+  tasks:
+  - name: Create a VM
+    vmware_guest:
+      hostname: "{{vcenter_hostname}}"
+      username: "{{vcenter_user}}"
+      password: "{{vcenter_pass}}"
+      cluster: "{{cluster}}"
+      validate_certs: no
+      datacenter: "{{datacenter}}"
+      folder: "{{folder}}"
+      name: "{{vmname}}"
+      state: present
+      guest_id: "{{osid}}"
+      disk:
+      - size_gb: "{{disk_sizegb}}"
+        type: "{{disk_type}}"
+        datastore: "{{datastore}}"
+      hardware:
+        memory_mb: "{{memory}}"
+        num_cpus: "{{cpucount}}"
+        scsi: paravirtual
+      networks:
+      - name: "{{networkname}}"
+        mac: "{{mac_address}}"
+      wait_for_ip_address: no #yes
+    delegate_to: localhost
+    register: deploy_vm
