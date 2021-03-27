@@ -1,0 +1,10 @@
+---
+- name: update soft for net admin
+  hosts: test
+  remote_user: root
+
+  tasks:
+  - name: ensure net-tools is at the latest version
+    yum:
+      name: net-tools
+      state: latest
